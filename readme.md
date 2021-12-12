@@ -47,12 +47,12 @@ In this `main.tf`,
 
 #### Issues faced during learning
 As part of the above POC, I came accross few problems:
-1. Doing AWS configure for different users were required (I had one system ☹️)
+1. Doing AWS configure for different users were required ( I had one system ☹️ )
 2. Running terraform in my machine (Nahhh!! I really dont wanted to do that)
 
 #### Solutions
-`Docker is always our best friend ❣️`
-Please find the commands to use single image and create multiple instances of the similar image for multiple use cases (I will try to find a better existing with does this or will create one if I explore more on this)
+`Docker is always our best friend ❤️`
+Please find the commands to use single image and create multiple instances of the similar image for multiple use cases (I will try to find a better existing image which does this or will contribute one to community if I explore more on this)
 
 #### To create terraform image
 
