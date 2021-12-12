@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: 2010-09-09
+Metadata:
+  License: Apache-2.0
+Description: "User creation using CFT"
+Resources:
+  ExternalPolicies:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: ExternalPolicy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - "sns:Publish"
+              - "sqs:ReceiveMessage"
+            Resource:
+              - "arn:aws:sqs:<region>:<accound-id>:sqs-test.fifo"
+              - "arn:aws:sns:<region>:<accound-id>:sns-test.fifo"
+      Users:
+        - !Ref ExternalUser
+    DependsOn: ExternalUser
+  ExternalUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "external-test-user"
+  ExternalAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref 'ExternalUser'
+  ExternalSecretStorage:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: "This stores a secret key created in before step"
+      Name: "external-user-secret-key"
+      SecretString: !GetAtt ExternalAccessKey.SecretAccessKey
